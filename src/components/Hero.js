@@ -1,3 +1,5 @@
+import hero from '../assets/hero.jpg';
+
 function Hero() {
   return (
     <section className="hero">
@@ -8,7 +10,7 @@ function Hero() {
         <button>Reserve a Table</button>
       </div>
       <div className="hero-image">
-        <img src="/hero.jpg" alt="Restaurant dish" />
+        <img src={hero} alt="Restaurant dish" />
       </div>
     </section>
   );
