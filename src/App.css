@@ -1,38 +1,179 @@
-.App {
-  text-align: center;
+/* =====================
+   Base Reset & Layout
+===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: auto;
+  gap: 1rem;
+  font-family: Arial, sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* =====================
+   Navigation Bar
+===================== */
+.nav-bar {
+  grid-column: 1 / -1;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 1rem;
+  background: #f4f4f4;
 }
 
-.App-link {
-  color: #61dafb;
+.nav-bar ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav-bar a {
+  text-decoration: none;
+  color: #333;
+}
+
+/* =====================
+   Hero Section
+===================== */
+.hero {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+  gap: 1rem;
+}
+
+.hero-text {
+  grid-column: 1 / span 6;
+}
+
+.hero-image {
+  grid-column: 7 / -1;
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+}
+
+.hero button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #f4b400;
+  border: none;
+  cursor: pointer;
+}
+
+/* =====================
+   Specials Section
+===================== */
+.specials {
+  grid-column: 1 / -1;
+}
+
+.specials-grid {
+  display: flex;
+  gap: 1rem;
+}
+
+.specials-grid article {
+  flex: 1;
+  padding: 1rem;
+  background: #f9f9f9;
+}
+
+/* =====================
+   Testimonials
+===================== */
+.testimonials {
+  grid-column: 1 / -1;
+}
+
+.testimonial-list {
+  display: flex;
+  gap: 1rem;
+}
+
+.testimonial-list article {
+  flex: 1;
+  background: #f9f9f9;
+  padding: 1rem;
+}
+
+/* =====================
+   About Section
+===================== */
+.about {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+}
+
+.about > div:first-child {
+  grid-column: 1 / span 6;
+}
+
+.about-images {
+  grid-column: 7 / -1;
+  display: flex;
+  gap: 1rem;
+}
+
+.about-images img {
+  width: 100%;
+  height: auto;
+}
+
+/* =====================
+   Footer
+===================== */
+.footer {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+  background: #333;
+  color: #fff;
+  padding: 2rem;
+}
+
+.footer-logo {
+  grid-column: 1 / span 3;
+}
+
+.footer-nav {
+  grid-column: 4 / span 3;
+}
+
+address {
+  grid-column: 7 / span 3;
+}
+
+.social-links {
+  grid-column: 10 / span 3;
+}
+
+.footer-nav ul,
+.social-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-nav a,
+.social-links a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.footer-nav h4,
+address h4,
+.social-links h4 {
+  margin-bottom: 0.5rem;
 }
