@@ -1,5 +1,5 @@
 import adrian from '../assets/adrian.jpg';
-import mario from '../assets/mario.jpg';
+import mario from '../assets/mario.jpeg';
 
 function About() {
   return (
