@@ -7,11 +7,19 @@ function About() {
       <div>
         <h2>Little Lemon</h2>
         <h3>Chicago</h3>
-        <p>Adrian and Mario bring Mediterranean flavors to life.</p>
+        <p>
+          Adrian and Mario bring Mediterranean flavors to life with a modern twist.
+          Their passion for fresh, authentic ingredients defines the Little Lemon experience.
+        </p>
       </div>
+
       <div className="about-images">
-        <img src={adrian} alt="Adrian" />
-        <img src={mario} alt="Mario" />
+        <div className="image-card card1">
+          <img src={adrian} alt="Adrian" />
+        </div>
+        <div className="image-card card2">
+          <img src={mario} alt="Mario" />
+        </div>
       </div>
     </section>
   );
