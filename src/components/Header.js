@@ -31,12 +31,49 @@ function Header() {
 
       <nav>
         <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><button onClick={() => handleScrollNav('specials')}>Specials</button></li>
-          <li><button onClick={() => handleScrollNav('testimonials')}>Testimonials</button></li>
-          <li><button onClick={() => handleScrollNav('about')}>About</button></li>
-          <li><Link to="/booking">Reservations</Link></li>
-        </ul>
+        {/* React Router links */}
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/booking">Reservations</Link>
+        </li>
+
+        {/* Scroll links */}
+        <li>
+          <ScrollLink
+            to="specials"
+            smooth={true}
+            offset={-80}
+            duration={500}
+            component="a"
+          >
+            Specials
+          </ScrollLink>
+        </li>
+        <li>
+          <ScrollLink
+            to="testimonials"
+            smooth={true}
+            offset={-80}
+            duration={500}
+            component="a"
+          >
+            Testimonials
+          </ScrollLink>
+        </li>
+        <li>
+          <ScrollLink
+            to="about"
+            smooth={true}
+            offset={-80}
+            duration={500}
+            component="a"
+          >
+            About
+          </ScrollLink>
+        </li>
+      </ul>
       </nav>
     </header>
   );
