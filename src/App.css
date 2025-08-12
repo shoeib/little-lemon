@@ -29,19 +29,28 @@
 
 .nav-bar ul {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-bar a {
+.nav-bar a,
+.nav-bar .nav-button {
   text-decoration: none;
   color: #333;
-  padding: 0.5rem 1rem;
-  display: inline-block;
+  font-weight: 500;
+  padding: 0.5rem 0.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-.nav-bar a:hover {
-  background-color: #ddd;
+.nav-bar a:hover,
+.nav-bar .nav-button:hover {
+  background-color: #f0f0f0;
+  border-radius: 4px;
 }
 
 /* =====================

@@ -1,79 +1,49 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
-import logo from '../assets/logo.png';
+//import './Header.css';
 
 function Header() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleScrollNav = (sectionId) => {
+  const handleNavClick = (section) => {
     if (location.pathname === '/') {
-      scroller.scrollTo(sectionId, {
+      // Already on home page → just scroll
+      scroller.scrollTo(section, {
         duration: 500,
         smooth: true,
-        offset: -80, // header height adjustment
+        offset: -50,
       });
     } else {
-      navigate('/');
-      setTimeout(() => {
-        scroller.scrollTo(sectionId, {
-          duration: 500,
-          smooth: true,
-          offset: -80,
-        });
-      }, 100);
+      // Navigate to home first, then scroll
+      navigate('/', { state: { scrollTo: section } });
     }
   };
 
   return (
     <header className="nav-bar">
-      <img src={logo} alt="Little Lemon Logo" className="logo" />
-
       <nav>
         <ul>
-        {/* React Router links */}
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/booking">Reservations</Link>
-        </li>
-
-        {/* Scroll links */}
-        <li>
-          <ScrollLink
-            to="specials"
-            smooth={true}
-            offset={-80}
-            duration={500}
-            component="a"
-          >
-            Specials
-          </ScrollLink>
-        </li>
-        <li>
-          <ScrollLink
-            to="testimonials"
-            smooth={true}
-            offset={-80}
-            duration={500}
-            component="a"
-          >
-            Testimonials
-          </ScrollLink>
-        </li>
-        <li>
-          <ScrollLink
-            to="about"
-            smooth={true}
-            offset={-80}
-            duration={500}
-            component="a"
-          >
-            About
-          </ScrollLink>
-        </li>
-      </ul>
+          <li>
+            <RouterLink to="/">Home</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/booking">Reservations</RouterLink>
+          </li>
+          <li>
+            <button className='nav-button' onClick={() => handleNavClick('hero')}>Hero</button>
+          </li>
+          <li>
+            <button className='nav-button' onClick={() => handleNavClick('specials')}>Specials</button>
+          </li>
+          <li>
+            <button className='nav-button' onClick={() => handleNavClick('testimonials')}>Testimonials</button>
+          </li>
+          <li>
+            <button className='nav-button' onClick={() => handleNavClick('about')}>About</button>
+          </li>
+        </ul>
       </nav>
     </header>
   );
