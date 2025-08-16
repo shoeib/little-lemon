@@ -1,47 +1,65 @@
-import React from 'react';
-import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
-import { scroller } from 'react-scroll';
-//import './Header.css';
+// Header.js
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
 
 function Header() {
   const location = useLocation();
-  const navigate = useNavigate();
-
-  const handleNavClick = (section) => {
-    if (location.pathname === '/') {
-      // Already on home page → just scroll
-      scroller.scrollTo(section, {
-        duration: 500,
-        smooth: true,
-        offset: -50,
-      });
-    } else {
-      // Navigate to home first, then scroll
-      navigate('/', { state: { scrollTo: section } });
-    }
-  };
+  const isHomePage = location.pathname === "/";
 
   return (
-    <header className="nav-bar">
-      <nav>
-        <ul>
+    <header className="header">
+      <nav className="navbar">
+        <ul className="nav-list">
+          {/* Always visible */}
           <li>
-            <RouterLink to="/">Home</RouterLink>
+            <Link to="/" className="nav-link">
+              Home
+            </Link>
           </li>
           <li>
-            <RouterLink to="/booking">Reservations</RouterLink>
+            <Link to="/booking" className="nav-link">
+              Reservations
+            </Link>
           </li>
+
+          {/* Specials */}
           <li>
-            <button className='nav-button' onClick={() => handleNavClick('hero')}>Hero</button>
+            {isHomePage ? (
+              <ScrollLink to="specials" smooth={true} duration={500} className="nav-link">
+                Specials
+              </ScrollLink>
+            ) : (
+              <Link to="/#specials" className="nav-link">
+                Specials
+              </Link>
+            )}
           </li>
+
+          {/* Testimonials */}
           <li>
-            <button className='nav-button' onClick={() => handleNavClick('specials')}>Specials</button>
+            {isHomePage ? (
+              <ScrollLink to="testimonials" smooth={true} duration={500} className="nav-link">
+                Testimonials
+              </ScrollLink>
+            ) : (
+              <Link to="/#testimonials" className="nav-link">
+                Testimonials
+              </Link>
+            )}
           </li>
+
+          {/* About */}
           <li>
-            <button className='nav-button' onClick={() => handleNavClick('testimonials')}>Testimonials</button>
-          </li>
-          <li>
-            <button className='nav-button' onClick={() => handleNavClick('about')}>About</button>
+            {isHomePage ? (
+              <ScrollLink to="about" smooth={true} duration={500} className="nav-link">
+                About
+              </ScrollLink>
+            ) : (
+              <Link to="/#about" className="nav-link">
+                About
+              </Link>
+            )}
           </li>
         </ul>
       </nav>
