@@ -1,68 +1,61 @@
-// Header.js
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Link as ScrollLink } from "react-scroll";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link as ScrollLink, scroller } from 'react-scroll';
 
-function Header() {
+
+function NavItem({ to, label }) {
   const location = useLocation();
-  const isHomePage = location.pathname === "/";
+  const navigate = useNavigate();
+
+  // If it's a route (starts with "/"), use React Router's Link
+  if (to.startsWith('/')) {
+    return (
+      <li>
+        <Link to={to}>{label}</Link>
+      </li>
+    );
+  }
+
+  // Otherwise, it's a scroll section
+  const handleClick = () => {
+    if (location.pathname === '/') {
+      // Already on homepage → scroll immediately
+      scroller.scrollTo(to, {
+        smooth: true,
+        offset: -80,
+        duration: 500,
+      });
+    } else {
+      // Navigate home first, then scroll
+      navigate('/', { state: { scrollTarget: to } });
+    }
+  };
 
   return (
-    <header className="header">
-      <nav className="navbar">
-        <ul className="nav-list">
-          {/* Always visible */}
-          <li>
-            <Link to="/" className="nav-link">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/booking" className="nav-link">
-              Reservations
-            </Link>
-          </li>
+    <li>
+      <button className="nav-button" onClick={handleClick}>
+        {label}
+      </button>
+    </li>
+  );
+}
 
-          {/* Specials */}
-          <li>
-            {isHomePage ? (
-              <ScrollLink to="specials" smooth={true} duration={500} className="nav-link">
-                Specials
-              </ScrollLink>
-            ) : (
-              <Link to="/#specials" className="nav-link">
-                Specials
-              </Link>
-            )}
-          </li>
+function Header() {
+  const menuItems = [
+    { to: '/', label: 'Home' },
+    { to: '/booking', label: 'Reservations' },
+    { to: 'specials', label: 'Specials' },
+    { to: 'testimonials', label: 'Testimonials' },
+    { to: 'about', label: 'About' },
+  ];
 
-          {/* Testimonials */}
-          <li>
-            {isHomePage ? (
-              <ScrollLink to="testimonials" smooth={true} duration={500} className="nav-link">
-                Testimonials
-              </ScrollLink>
-            ) : (
-              <Link to="/#testimonials" className="nav-link">
-                Testimonials
-              </Link>
-            )}
-          </li>
-
-          {/* About */}
-          <li>
-            {isHomePage ? (
-              <ScrollLink to="about" smooth={true} duration={500} className="nav-link">
-                About
-              </ScrollLink>
-            ) : (
-              <Link to="/#about" className="nav-link">
-                About
-              </Link>
-            )}
-          </li>
-        </ul>
-      </nav>
+  return (
+    <header className="nav-bar">
+      <img src="/navlogo.png" alt="Little Lemon Logo" className="logo" />
+      <ul>
+        {menuItems.map((item, idx) => (
+          <NavItem key={idx} {...item} />
+        ))}
+      </ul>
     </header>
   );
 }
