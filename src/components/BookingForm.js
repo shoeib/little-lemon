@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./BookingForm.css";
 
 const BookingForm = () => {
   // Step 3: State variables for form fields
@@ -19,21 +20,13 @@ const BookingForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = {
-      date,
-      time,
-      guests,
-      occasion,
-    };
+    const formData = { date, time, guests, occasion };
     console.log("Reservation submitted:", formData);
     alert(`Reservation confirmed for ${guests} on ${date} at ${time}`);
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{ display: "grid", maxWidth: "300px", gap: "20px" }}
-    >
+    <form className="booking-form" onSubmit={handleSubmit}>
       <label htmlFor="res-date">Choose date</label>
       <input
         type="date"
@@ -80,7 +73,9 @@ const BookingForm = () => {
         <option>Anniversary</option>
       </select>
 
-      <input type="submit" value="Make Your Reservation" />
+      <button type="submit" className="submit-btn">
+        Make Your Reservation
+      </button>
     </form>
   );
 };

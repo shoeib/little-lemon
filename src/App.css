@@ -270,3 +270,22 @@ button:hover, .btn:hover {
 .footer a:hover {
   color: #F4CE14;
 }
+
+/* Making the booking page button aligns with UI kit */
+.hero-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1.25rem;
+  background: #f4b400;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.hero-btn:hover {
+  background: #e0a800;
+}

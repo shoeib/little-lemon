@@ -1,13 +1,21 @@
 import React from "react";
 import BookingForm from "./BookingForm";
+import "./BookingPage.css";
 
 const BookingPage = () => {
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Book Your Table</h1>
-      <p>Please fill in the form below to reserve your spot.</p>
-      <BookingForm />
-    </div>
+    <section className="booking-page" id="booking">
+      <div className="booking-content">
+        <h1 className="booking-title">Reserve a Table</h1>
+        <p className="booking-subtitle">
+          Book your special evening with us. Choose a date, time, and let us know the occasion!
+        </p>
+
+        <div className="booking-card">
+          <BookingForm />
+        </div>
+      </div>
+    </section>
   );
 };
 

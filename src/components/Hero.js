@@ -1,4 +1,5 @@
-import hero from '../assets/hero.jpg';
+import { Link } from "react-router-dom";
+import hero from "../assets/hero.jpg";
 
 function Hero() {
   return (
@@ -7,7 +8,9 @@ function Hero() {
         <h1>Little Lemon</h1>
         <h2>Chicago</h2>
         <p>We serve fresh Mediterranean cuisine with a modern twist.</p>
-        <button>Reserve a Table</button>
+        <Link to="/booking" className="hero-btn">
+          Reserve a Table
+        </Link>
       </div>
       <div className="hero-image">
         <img src={hero} alt="Restaurant dish" />

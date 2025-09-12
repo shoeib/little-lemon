@@ -1,0 +1,54 @@
+/* Make the page span the full app grid and center content */
+.booking-page {
+  grid-column: 1 / -1;      /* IMPORTANT: span the full 12 columns */
+  display: flex;
+  justify-content: center;
+  padding: 48px 20px;
+  background: #fff;
+  color: #495e57;
+  box-sizing: border-box;
+}
+
+/* inner wrapper so text + card are stacked nicely */
+.booking-content {
+  width: 100%;
+  max-width: 980px;         /* page content width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* optional card around the form */
+.booking-card {
+  width: 100%;
+  max-width: 520px;         /* card width */
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  box-sizing: border-box;
+}
+
+/* headings */
+.booking-title {
+  font-size: 2.25rem;
+  margin: 0;
+  color: #495e57;
+  text-align: center;
+}
+
+.booking-subtitle {
+  font-size: 1.125rem;
+  margin: 0;
+  max-width: 720px;
+  text-align: center;
+  color: #6b7a75;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .booking-content { padding: 0 16px; }
+  .booking-card { padding: 18px; max-width: 100%; }
+  .booking-title { font-size: 1.75rem; }
+}

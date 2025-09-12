@@ -1,0 +1,45 @@
+.booking-form {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* expand inputs to full width of the card */
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* label styling */
+.booking-form label {
+  font-weight: 600;
+  color: #495e57;
+  font-size: 0.95rem;
+}
+
+/* submit button */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #f4ce14;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  color: #333;
+}
+
+@media (max-width: 480px) {
+  .booking-form { gap: 12px; }
+  .booking-form input, .booking-form select { padding: 10px; font-size: 0.95rem; }
+}
