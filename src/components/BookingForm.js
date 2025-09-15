@@ -1,38 +1,49 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./BookingForm.css";
 
-const BookingForm = () => {
-  // Step 3: State variables for form fields
+function BookingForm({ availableTimes, dispatch }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [guests, setGuests] = useState(1);
   const [occasion, setOccasion] = useState("Birthday");
+  const [submitted, setSubmitted] = useState(false);
 
-  // Available times list (stateful so it could be updated later if needed)
-  const [availableTimes] = useState([
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
-    "21:00",
-    "22:00",
-  ]);
+  const handleDateChange = (e) => {
+    const newDate = e.target.value;
+    setDate(newDate);
+    dispatch({ type: "UPDATE_TIMES", date: newDate });
+  };
 
-  const handleSubmit = (e) => {
+ const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = { date, time, guests, occasion };
-    console.log("Reservation submitted:", formData);
-    alert(`Reservation confirmed for ${guests} on ${date} at ${time}`);
+
+    const formData = {
+      date,
+      time,
+      guests,
+      occasion,
+    };
+
+    // submitAPI is globally available (loaded from index.html)
+    const success = submitAPI(formData);
+
+    if (success) {
+      setSubmitted(true);
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   return (
     <form className="booking-form" onSubmit={handleSubmit}>
+      <h2>Book Now</h2>
+
       <label htmlFor="res-date">Choose date</label>
       <input
         type="date"
         id="res-date"
         value={date}
-        onChange={(e) => setDate(e.target.value)}
+        onChange={handleDateChange}
         required
       />
 
@@ -55,7 +66,6 @@ const BookingForm = () => {
       <input
         type="number"
         id="guests"
-        placeholder="1"
         min="1"
         max="10"
         value={guests}
@@ -73,11 +83,11 @@ const BookingForm = () => {
         <option>Anniversary</option>
       </select>
 
-      <button type="submit" className="submit-btn">
-        Make Your Reservation
-      </button>
+      <input type="submit" value="Make Your Reservation" />
+
+      {submitted && <p className="success-message">✅ Reservation confirmed!</p>}
     </form>
   );
-};
+}
 
 export default BookingForm;
