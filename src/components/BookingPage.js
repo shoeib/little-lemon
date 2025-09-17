@@ -1,24 +1,33 @@
 import { useReducer } from "react";
 import BookingForm from "./BookingForm";
 import "./BookingPage.css";
+import { fetchAPI, submitAPI } from "../api";
 
-// Reducer initializer: get today's available times
-export function initializeTimes() {
-  const today = new Date();
-  return fetchAPI(today); // fetchAPI comes from the <script> tag
-}
-
-// Reducer updater: update times when date changes
-export function updateTimes(state, action) {
-  if (action.type === "UPDATE_TIMES") {
+// Reducer for available times
+function updateTimes(state, action) {
+  if (action.type === "UPDATE_DATE") {
     return fetchAPI(new Date(action.date));
   }
   return state;
 }
 
+// Initialize available times (today's date)
+function initializeTimes() {
+  return fetchAPI(new Date());
+}
 
 const BookingPage = () => {
   const [availableTimes, dispatch] = useReducer(updateTimes, [], initializeTimes);
+  // Handle form submission
+  const submitForm = (formData) => {
+    const success = submitAPI(formData);
+    if (success) {
+      alert("✅ Reservation submitted successfully!");
+    } else {
+      alert("❌ Failed to submit reservation.");
+    }
+  };
+
   return (
     <section className="booking-page" id="booking">
       <div className="booking-content">
@@ -28,7 +37,11 @@ const BookingPage = () => {
         </p>
 
         <div className="booking-card">
-          <BookingForm availableTimes={availableTimes} dispatch={dispatch}/>
+          <BookingForm
+        availableTimes={availableTimes}
+        dispatch={dispatch}
+        submitForm={submitForm}
+      />
         </div>
       </div>
     </section>

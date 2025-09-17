@@ -1,43 +1,28 @@
 import { useState } from "react";
 import "./BookingForm.css";
+//import { submitAPI } from "../api.js"; // import wrapper
 
-function BookingForm({ availableTimes, dispatch }) {
+function BookingForm({ availableTimes, dispatch, submitForm }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [guests, setGuests] = useState(1);
   const [occasion, setOccasion] = useState("Birthday");
-  const [submitted, setSubmitted] = useState(false);
+  //const [submitted, setSubmitted] = useState(false);
+
+ const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = { date, time, guests, occasion };
+    submitForm(formData);
+  };
 
   const handleDateChange = (e) => {
     const newDate = e.target.value;
     setDate(newDate);
-    dispatch({ type: "UPDATE_TIMES", date: newDate });
-  };
-
- const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const formData = {
-      date,
-      time,
-      guests,
-      occasion,
-    };
-
-    // submitAPI is globally available (loaded from index.html)
-    const success = submitAPI(formData);
-
-    if (success) {
-      setSubmitted(true);
-    } else {
-      alert("Something went wrong. Please try again.");
-    }
+    dispatch({ type: "UPDATE_DATE", date: newDate });
   };
 
   return (
     <form className="booking-form" onSubmit={handleSubmit}>
-      <h2>Book Now</h2>
-
       <label htmlFor="res-date">Choose date</label>
       <input
         type="date"
@@ -54,7 +39,7 @@ function BookingForm({ availableTimes, dispatch }) {
         onChange={(e) => setTime(e.target.value)}
         required
       >
-        <option value="">Select a time</option>
+        <option value="">-- Select a time --</option>
         {availableTimes.map((t) => (
           <option key={t} value={t}>
             {t}
@@ -83,9 +68,7 @@ function BookingForm({ availableTimes, dispatch }) {
         <option>Anniversary</option>
       </select>
 
-      <input type="submit" value="Make Your Reservation" />
-
-      {submitted && <p className="success-message">✅ Reservation confirmed!</p>}
+      <button type="submit">Make Your Reservation</button>
     </form>
   );
 }
