@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';
 import BookingPage from './components/BookingPage';
 import Header from './components/Header';
+import ConfirmedBooking from "./components/ConfirmedBooking";
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { scroller } from 'react-scroll';
@@ -25,6 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/booking" element={<BookingPage />} />
+        <Route path="/confirmed" element={<ConfirmedBooking />} /> {/* ✅ */}
       </Routes>
     </div>
   );

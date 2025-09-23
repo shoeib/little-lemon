@@ -1,20 +1,32 @@
+// src/components/BookingPage.test.js
 import { initializeTimes, updateTimes } from "./components/BookingPage";
+import * as api from "./api"; // adjust path if needed
 
-test("initializeTimes returns correct initial times", () => {
-  const times = initializeTimes();
-  expect(times).toEqual(["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]);
-});
+jest.mock("./api");
 
-test("updateTimes returns the same state for UPDATE action", () => {
-  const state = ["17:00", "18:00"];
-  const action = { type: "UPDATE", date: "2023-01-01" };
-  const newState = updateTimes(state, action);
-  expect(newState).toEqual(["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]);
-});
+describe("BookingPage reducer functions", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-test("updateTimes returns same state if action type is unknown", () => {
-  const state = ["17:00"];
-  const action = { type: "UNKNOWN" };
-  const newState = updateTimes(state, action);
-  expect(newState).toEqual(state);
+  test("initializeTimes calls fetchAPI with today's date", () => {
+    const mockTimes = ["17:00", "18:00"];
+    api.fetchAPI.mockReturnValue(mockTimes);
+
+    const result = initializeTimes();
+
+    expect(api.fetchAPI).toHaveBeenCalled();
+    expect(result).toEqual(mockTimes);
+  });
+
+  test("updateTimes returns available times for the given date", () => {
+    const mockTimes = ["19:00", "20:00"];
+    api.fetchAPI.mockReturnValue(mockTimes);
+
+    const fakeDate = new Date("2025-09-22");
+    const result = updateTimes([], { type: "UPDATE_DATE", date: fakeDate });
+
+    expect(api.fetchAPI).toHaveBeenCalledWith(fakeDate);
+    expect(result).toEqual(mockTimes);
+  });
 });

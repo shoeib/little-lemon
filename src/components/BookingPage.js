@@ -2,27 +2,34 @@ import { useReducer } from "react";
 import BookingForm from "./BookingForm";
 import "./BookingPage.css";
 import { fetchAPI, submitAPI } from "../api";
+import { useNavigate } from "react-router-dom";
+
 
 // Reducer for available times
-function updateTimes(state, action) {
-  if (action.type === "UPDATE_DATE") {
-    return fetchAPI(new Date(action.date));
+export function updateTimes(state, action) {
+  switch (action.type) {
+    case "UPDATE_DATE":
+      return fetchAPI(new Date(action.date)); // must pass a Date object
+    default:
+      return state;
   }
-  return state;
 }
 
 // Initialize available times (today's date)
-function initializeTimes() {
-  return fetchAPI(new Date());
+export function initializeTimes() {
+  const today = new Date();
+  return fetchAPI(today);
 }
 
 const BookingPage = () => {
   const [availableTimes, dispatch] = useReducer(updateTimes, [], initializeTimes);
+  const navigate = useNavigate();
+
   // Handle form submission
   const submitForm = (formData) => {
     const success = submitAPI(formData);
     if (success) {
-      alert("✅ Reservation submitted successfully!");
+      navigate("/confirmed"); // ✅ redirect on success
     } else {
       alert("❌ Failed to submit reservation.");
     }
@@ -33,7 +40,7 @@ const BookingPage = () => {
       <div className="booking-content">
         <h1 className="booking-title">Reserve a Table</h1>
         <p className="booking-subtitle">
-          Book your special evening with us. Choose a date, time, and let us know the occasion!
+          Book now. Choose a date, time, and let us know the occasion!
         </p>
 
         <div className="booking-card">
