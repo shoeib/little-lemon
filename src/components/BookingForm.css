@@ -19,6 +19,12 @@
   box-sizing: border-box;
 }
 
+.error {
+  color: #d9534f; /* bootstrap-style red */
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+
 /* label styling */
 .booking-form label {
   font-weight: 600;

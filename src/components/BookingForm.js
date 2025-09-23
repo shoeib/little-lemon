@@ -6,9 +6,10 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
   const [time, setTime] = useState("");
   const [guests, setGuests] = useState(1);
   const [occasion, setOccasion] = useState("Birthday");
+  const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
 
-  const today = new Date().toISOString().split("T")[0]; // format: YYYY-MM-DD
+  const today = new Date().toISOString().split("T")[0]; // format YYYY-MM-DD
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,32 +23,47 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
     dispatch({ type: "UPDATE_DATE", date: newDate });
   };
 
-  // Client-side validation
+  // Validate form fields
   useEffect(() => {
-    if (
-      date &&
-      time &&
-      guests >= 1 &&
-      guests <= 10 &&
-      occasion.trim() !== ""
-    ) {
-      setIsFormValid(true);
-    } else {
-      setIsFormValid(false);
-    }
-  }, [date, time, guests, occasion]);
+  const today = new Date().toISOString().split("T")[0]; // moved here
+  const newErrors = {};
+
+  if (!date) {
+    newErrors.date = "Please choose a date.";
+  } else if (date < today) {
+    newErrors.date = "Date cannot be in the past.";
+  }
+
+  if (!time) {
+    newErrors.time = "Please select a time.";
+  }
+
+  if (!guests || guests < 1) {
+    newErrors.guests = "At least 1 guest is required.";
+  } else if (guests > 10) {
+    newErrors.guests = "Maximum 10 guests allowed.";
+  }
+
+  if (!occasion) {
+    newErrors.occasion = "Please select an occasion.";
+  }
+
+  setErrors(newErrors);
+  setIsFormValid(Object.keys(newErrors).length === 0);
+}, [date, time, guests, occasion]);
 
   return (
-    <form className="booking-form" onSubmit={handleSubmit}>
+    <form className="booking-form" onSubmit={handleSubmit} noValidate role="form">
       <label htmlFor="res-date">Choose date</label>
       <input
         type="date"
         id="res-date"
         value={date}
-        min={today} // ✅ no past dates allowed
+        min={today}
         onChange={handleDateChange}
         required
       />
+      {errors.date && <span className="error">{errors.date}</span>}
 
       <label htmlFor="res-time">Choose time</label>
       <select
@@ -63,6 +79,7 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
           </option>
         ))}
       </select>
+      {errors.time && <span className="error">{errors.time}</span>}
 
       <label htmlFor="guests">Number of guests</label>
       <input
@@ -74,6 +91,7 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
         onChange={(e) => setGuests(Number(e.target.value))}
         required
       />
+      {errors.guests && <span className="error">{errors.guests}</span>}
 
       <label htmlFor="occasion">Occasion</label>
       <select
@@ -86,6 +104,7 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
         <option>Birthday</option>
         <option>Anniversary</option>
       </select>
+      {errors.occasion && <span className="error">{errors.occasion}</span>}
 
       <button type="submit" disabled={!isFormValid}>
         Make Your Reservation
