@@ -13,7 +13,7 @@ function Hero() {
         </Link>
       </div>
       <div className="hero-image">
-        <img src={hero} alt="Restaurant dish" />
+        <img src={hero} alt="A plated Mediterranean dish at Little Lemon" />
       </div>
     </section>
   );

@@ -1,8 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./ConfirmedBooking.css";
 
 function ConfirmedBooking() {
+  const { state } = useLocation();
+  const { date, time, guests, occasion } = state || {};
+
   return (
     <main className="confirmed-booking">
       <div className="confirmed-card">
@@ -13,13 +16,16 @@ function ConfirmedBooking() {
           meal.
         </p>
 
-        {/* Placeholder for booking details (optional) */}
-        <div className="booking-details">
-          <p><strong>Date:</strong> Your selected date</p>
-          <p><strong>Time:</strong> Your selected time</p>
-          <p><strong>Guests:</strong> Number of guests</p>
-          <p><strong>Occasion:</strong> Occasion</p>
-        </div>
+        {state ? (
+          <div className="booking-details">
+            <p><strong>Date:</strong> {date}</p>
+            <p><strong>Time:</strong> {time}</p>
+            <p><strong>Guests:</strong> {guests}</p>
+            <p><strong>Occasion:</strong> {occasion}</p>
+          </div>
+        ) : (
+          <p>No booking details found.</p>
+        )}
 
         <Link to="/" className="home-button">
           Back to Home

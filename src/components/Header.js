@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Link as ScrollLink, scroller } from 'react-scroll';
+import { Link as scroller } from 'react-scroll';
 
 
 function NavItem({ to, label }) {
@@ -49,14 +49,14 @@ function Header() {
   ];
 
   return (
-    <header className="nav-bar">
+    <nav className="nav-bar" aria-label="Main Navigation">
       <img src="/navlogo.png" alt="Little Lemon Logo" className="logo" />
       <ul>
         {menuItems.map((item, idx) => (
           <NavItem key={idx} {...item} />
         ))}
       </ul>
-    </header>
+    </nav>
   );
 }
 

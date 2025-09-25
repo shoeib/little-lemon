@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./BookingForm.css";
 
 function BookingForm({ availableTimes, dispatch, submitForm }) {
@@ -8,6 +9,7 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
   const [occasion, setOccasion] = useState("Birthday");
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
+  const navigate = useNavigate();
 
   const today = new Date().toISOString().split("T")[0]; // format YYYY-MM-DD
 
@@ -15,6 +17,7 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
     e.preventDefault();
     const formData = { date, time, guests, occasion };
     submitForm(formData);
+    navigate("/confirmed", { state: formData }); // ✅ pass data
   };
 
   const handleDateChange = (e) => {
@@ -53,7 +56,7 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
 }, [date, time, guests, occasion]);
 
   return (
-    <form className="booking-form" onSubmit={handleSubmit} noValidate role="form">
+    <form className="booking-form" onSubmit={handleSubmit} noValidate>
       <label htmlFor="res-date">Choose date</label>
       <input
         type="date"
