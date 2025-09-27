@@ -1,51 +1,48 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Link as scroller } from 'react-scroll';
-
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { scroller } from "react-scroll";
 
 function NavItem({ to, label }) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // If it's a route (starts with "/"), use React Router's Link
-  if (to.startsWith('/')) {
-    return (
-      <li>
-        <Link to={to}>{label}</Link>
-      </li>
-    );
-  }
+  const handleClick = (e) => {
+    if (!to.startsWith("/")) {
+      e.preventDefault(); // stop Link from navigating
 
-  // Otherwise, it's a scroll section
-  const handleClick = () => {
-    if (location.pathname === '/') {
-      // Already on homepage → scroll immediately
-      scroller.scrollTo(to, {
-        smooth: true,
-        offset: -80,
-        duration: 500,
-      });
-    } else {
-      // Navigate home first, then scroll
-      navigate('/', { state: { scrollTarget: to } });
+      if (location.pathname === "/") {
+        // Already on homepage → scroll immediately
+        scroller.scrollTo(to, {
+          smooth: true,
+          offset: -80,
+          duration: 500,
+        });
+      } else {
+        // Navigate home first, then scroll
+        navigate("/", { state: { scrollTarget: to } });
+      }
     }
   };
 
   return (
     <li>
-      <button className="nav-button" onClick={handleClick}>
+      <Link
+        to={to.startsWith("/") ? to : "/"} // route if starts with "/", otherwise home
+        onClick={handleClick}
+        className="nav-button"
+      >
         {label}
-      </button>
+      </Link>
     </li>
   );
 }
 
 function Header() {
   const menuItems = [
-    { to: '/', label: 'Home' },
-    { to: '/booking', label: 'Reservations' },
-    { to: 'specials', label: 'Specials' },
-    { to: 'testimonials', label: 'Testimonials' },
-    { to: 'about', label: 'About' },
+    { to: "/", label: "Home" },
+    { to: "/booking", label: "Reservations" },
+    { to: "specials", label: "Specials" },
+    { to: "testimonials", label: "Testimonials" },
+    { to: "about", label: "About" },
   ];
 
   return (
