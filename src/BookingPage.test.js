@@ -1,3 +1,4 @@
+//If react-router-dom errors, downgrade react-router-dom to version 6
 // src/components/BookingPage.test.js
 import { initializeTimes, updateTimes } from "./components/BookingPage";
 import * as api from "./api"; // adjust path if needed

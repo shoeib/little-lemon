@@ -1,3 +1,4 @@
+//If react-router-dom errors, downgrade react-router-dom to version 6
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import BookingForm from "./components/BookingForm";
