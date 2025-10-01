@@ -1,3 +1,10 @@
+import avatar from "../assets/avatar.jpg"; // adjust relative path
+import avatar2 from "../assets/avatar-2.jpg"; // adjust relative path
+import avatar3 from "../assets/avatar-3.jpg"; // adjust relative path
+import avatar4 from "../assets/avatar-4.jpg"; // adjust relative path
+import avatar5 from "../assets/avatar-5.jpg";
+import avatar6 from "../assets/avatar-6.jpg";
+
 function Testimonials() {
   return (
     <section className="testimonials" id="testimonials">
@@ -5,7 +12,7 @@ function Testimonials() {
       <div className="testimonial-list">
         <article>
           <img
-            src="https://via.placeholder.com/80"
+            src={avatar}
             alt="Sarah L."
             className="profile-pic"
           />
@@ -15,7 +22,7 @@ function Testimonials() {
         </article>
         <article>
           <img
-            src="https://via.placeholder.com/80"
+            src={avatar2}
             alt="James K."
             className="profile-pic"
           />
@@ -25,7 +32,7 @@ function Testimonials() {
         </article>
         <article>
           <img
-            src="https://via.placeholder.com/80"
+            src={avatar3}
             alt="Maria P."
             className="profile-pic"
           />
@@ -35,33 +42,33 @@ function Testimonials() {
         </article>
         <article>
           <img
-            src="https://via.placeholder.com/80"
-            alt="Daniel R."
+            src={avatar4}
+            alt="Danielle R."
             className="profile-pic"
           />
           <p className="stars">⭐⭐⭐⭐⭐</p>
           <p>"The desserts are incredible. The lemon cake was to die for!"</p>
-          <h4>- Daniel R.</h4>
+          <h4>- Danielle R.</h4>
         </article>
         <article>
           <img
-            src="https://via.placeholder.com/80"
-            alt="Emily W."
-            className="profile-pic"
-          />
-          <p className="stars">⭐⭐⭐⭐⭐</p>
-          <p>"Quick service and great prices. Definitely my new go-to spot."</p>
-          <h4>- Emily W.</h4>
-        </article>
-        <article>
-          <img
-            src="https://via.placeholder.com/80"
+            src={avatar5}
             alt="Ahmed S."
             className="profile-pic"
           />
           <p className="stars">⭐⭐⭐⭐⭐</p>
-          <p>"Perfect for family dinners. Everyone loved their meal."</p>
+          <p>"Quick service and great prices. Definitely my new go-to spot."</p>
           <h4>- Ahmed S.</h4>
+        </article>
+        <article>
+          <img
+            src={avatar6}
+            alt="Eddie W."
+            className="profile-pic"
+          />
+          <p className="stars">⭐⭐⭐⭐⭐</p>
+          <p>"Perfect for family dinners. Everyone loved their meal."</p>
+          <h4>- Eddie W.</h4>
         </article>
       </div>
     </section>
