@@ -140,7 +140,7 @@ button:hover, .btn:hover {
 
 .hero-text h1,
 .hero-text h2 {
-  color: #F4CE14;
+  color: #fff;
 }
 
 .hero-image {
@@ -183,29 +183,73 @@ button:hover, .btn:hover {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.specials-grid article:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
 }
 
 /* =====================
    Testimonials
 ===================== */
 .testimonials {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: #495E57;
   grid-column: 1 / -1;
-  background: #f4f4f4;
-  padding: 2rem;
+}
+
+.testimonials h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #fff;
 }
 
 .testimonial-list {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
+  margin-top: 2rem;
 }
 
 .testimonial-list article {
-  flex: 1;
-  background: #fff;
-  padding: 1rem;
-  border-radius: 16px;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.testimonial-list article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.stars {
+  font-size: 1.2rem;
+  color: #f4c150; /* gold color for stars */
+  margin-bottom: 0.5rem;
+}
+
+.testimonial-list h4 {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 3px solid #f4c150; /* subtle highlight */
+}
 /* =====================
    About Section
 ===================== */
